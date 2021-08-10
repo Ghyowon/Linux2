@@ -1,0 +1,171 @@
+#! /bin/sh
+
+echo 'name:' $USERNAME
+echo 'host:'  $HOSTNAME
+exit 0
+----------------------------------------------------------------------------
+#! /bin/sh
+
+num1=100
+num2=$num1+100
+
+echo $num2
+
+num3=`expr $num1 + 100`
+echo $num3
+
+----------------------------------------------------------------------------
+#! /bin/sh
+
+echo "file name: $0"
+
+echo "arguments : $1, $2"
+
+echo $*
+
+exit 0
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+[1] 점수를 매개변수로 받아서 A~F학점 출력
+#gedit score.sh
+*****************************************
+#! /bin/sh
+
+echo 점수입력 : 
+read score
+
+if [ $score = 100 ]
+then
+	echo "A학점"
+elif [ $score -lt 100 ] && [ $score -ge 90 ];
+then
+	echo "B학점"
+elif [ $score -lt 90 ] && [ $score -ge 80 ];
+then
+	echo "C학점"
+elif [ $score -lt 80 ] && [ $score -ge 70 ];
+then
+	echo "D학점"
+elif [ $score -lt 70 ] && [ $score -ge 60 ];
+then
+	echo "E학점"
+else
+	echo "F학점"
+fi
+exit 0
+*****************************************
+
+[2] 점수를 매개변수로 받아서 A~F 학점 출력
+#gedit score2.sh
+*****************************************
+#! /bin/sh
+
+echo 점수입력 : 
+read score2
+
+case $score2 in
+	100|9?)
+		echo "A학점";;
+	90|8?)
+		echo "B학점";;
+	80|7?)
+		echo "C학점";;
+	70|6?)
+		echo "D학점";;
+	*)
+		echo "F학점";;
+esac
+exit 0
+*****************************************
+[3] 1~100까지의 홀수의 합과 짝수의 합 출력
+#gedit sum.sh
+*****************************************
+#! /bin/sh
+
+even=0
+odd=0
+
+for i in {1..100}
+do
+let "j=$i%2"
+
+if [ $j -eq 0 ]
+then
+even=`expr $even + $i`
+else
+odd=`expr $odd + $i`
+fi
+done
+
+echo "짝수의 합 : $even"
+echo "홀수의 합 : $odd"
+exit 0
+*****************************************
+[4] 1부터 10까지의 합을 출력
+#gedit while.sh
+*****************************************
+#! /bin/sh
+
+sum=0
+i=1
+while [ $i -le 10 ]
+do
+	sum=`expr $sum + $i`
+	su=`expr $i + 1`
+done
+echo '총합계 : '$sum
+exit 0
+*****************************************
+[5] 두 수와 연산자 입력받아 함수로 보내고 함수의 리턴값을 출력
+#gedit input.sh
+*****************************************
+#! /bin/sh
+
+add()
+{
+	total=`expr $num1 + $num2`
+	echo "$num1 + $num2 = $total"
+}
+minus()
+{
+	total=`expr $num1 - $num2`
+	echo "$num1 - $num2 = $total"
+}
+multi()
+{
+	total=`expr $num1  \* $num2`
+	echo "$num1 * $num2 = $total"
+}
+divi()
+{
+	total=`expr $num1 / $num2`
+	echo "$num1 / $num2 = $total"
+}
+
+echo "첫번째 숫자를 입력하세요."
+read num1
+echo "두번째 숫자를 입력하세요."
+read num2
+echo "연산자를 입력하세요."
+read operator
+
+if [ $operator == '+' ];
+then
+	add
+elif [ $operator == '-' ];
+then
+	minus
+elif [ $operator == '*' ];
+then
+	multi
+elif [ $operator == '/' ];
+then
+	divi
+else
+echo "잘못 입력하셨습니다."
+
+fi
+
+exit 0
+
+*****************************************
